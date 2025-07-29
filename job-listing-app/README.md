@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Job Listing Application
 
-## Getting Started
+A Next.js-based job board application with dynamic job listings, filtering, and detailed job view pages.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Job Listings Page**
+  - View all available job opportunities
+  - Sort by relevance, newest, or oldest
+  - Responsive card design with organization avatars
+  - Color-coded tags (Education = yellow, IT = blue)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Job Detail Page**
+  - Detailed view of each job opportunity
+  - Two-column layout for optimal information display
+  - Icons for key information (calendar, location, etc.)
+  - "Submit Application" button
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Technical Features**
+  - Built with Next.js App Router
+  - TypeScript support
+  - Tailwind CSS for styling
+  - Responsive design
+  - Dynamic routing for job details
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Installation
+   ```bash
+    https://github.com/anteneh83/A2SV-Tasks.git
+   cd job-listing-app
+   npm install 
+   npm run dev
+   
