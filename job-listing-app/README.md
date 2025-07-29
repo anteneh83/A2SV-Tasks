@@ -21,7 +21,9 @@ A Next.js-based job board application with dynamic job listings, filtering, and 
 - TypeScript support  
 - Tailwind CSS for styling  
 - Responsive design  
-- Dynamic routing for job details  
+- Dynamic routing for job details
+
+
 
 ## Installation
 
@@ -30,6 +32,8 @@ git clone https://github.com/anteneh83/A2SV-Tasks.git
 cd job-listing-app
 npm install 
 npm run dev
+```
+
 📸 Screenshots
 📋 Job listings with sorting options
 <img src="https://github.com/user-attachments/assets/73fd19b3-a0a3-4ef8-b608-343bd998edd2" alt="Job Listings Page" width="700" />
