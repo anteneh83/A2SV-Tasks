@@ -36,6 +36,10 @@ npm run dev
 
 📸 Screenshots
 📋 Job listings with sorting options
+
 <img src="https://github.com/user-attachments/assets/73fd19b3-a0a3-4ef8-b608-343bd998edd2" alt="Job Listings Page" width="700" />
+
 🧾 Detailed job view with two-column layout
+
+
 <img src="https://github.com/user-attachments/assets/1aa87546-521c-4341-b108-67a3b919e5e6" alt="Job Details Page 1" width="700" /> <img src="https://github.com/user-attachments/assets/7b3c0975-5426-48aa-a625-648f2d2c45e4" alt="Job Details Page 2" width="700" /> `
