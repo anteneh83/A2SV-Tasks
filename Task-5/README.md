@@ -18,7 +18,7 @@ A reusable and accessible **Contact Form** built with **React** and **TypeScript
 ##  Installation & Usage
 
 ```
-git clone https://github.com/your-username/contact-form-app.git
+git clone https://github.com/anteneh83/A2SV-Tasks.git
 cd task-5
 npm install
 npm run dev
