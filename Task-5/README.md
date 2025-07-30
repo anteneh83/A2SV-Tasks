@@ -1,69 +1,39 @@
-# React + TypeScript + Vite
+# React Contact Form with Custom useForm Hook
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A reusable and accessible **Contact Form** built with **React** and **TypeScript**. It includes custom form handling, real-time validation, and basic UX feedback without any third-party form libraries.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+-  Reusable `useForm` hook for form state and validation
+-  Built-in client-side validation (name, email, message)
+-  Inline error messages and input highlighting
+-  Simulated form submission with a success message
+-  Accessible HTML structure and labels
+-  Clean and minimal styling (customizable)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+##  Installation & Usage
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+git clone https://github.com/your-username/contact-form-app.git
+cd task-5
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+##  Technologies Used
+⚛ React
+🟦 TypeScript
+🎨 Custom CSS
+🧪 HTML5 form validation logic
+💡 React Hooks (useState)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 📸 Screenshot
+<img width="1171" height="662" alt="image" src="https://github.com/user-attachments/assets/cf88ef26-202f-4129-b8af-d2b5a91fa907" />
+<img width="1070" height="650" alt="image" src="https://github.com/user-attachments/assets/9bd4ea48-5058-4feb-a7a6-e672b440ac9f" />
+<img width="512" height="551" alt="image" src="https://github.com/user-attachments/assets/6002f824-c5b9-43bf-a8fc-8dadfa2b30ef" />
+
