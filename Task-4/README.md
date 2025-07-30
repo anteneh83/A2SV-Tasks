@@ -17,7 +17,7 @@ A simple, interactive Todo List built with **React**, **TypeScript**, and **loca
 
  ## Installation & Usage
 ```
-git clone https://github.com/your-username/todo-list-app.git
+git clone https://github.com/anteneh83/A2SV-Tasks.git
 cd task-4
 npm install
 npm run dev
