@@ -33,7 +33,7 @@ cd job-listing-app
 npm install 
 npm run dev
 ```
-#some screenshoot demos
+# some screenshoot demos
 ### Newest Jobs
 <img width="1066" height="679" alt="image" src="https://github.com/user-attachments/assets/bfedc4b8-684b-4999-ae00-fa25bfd64e81" />
 
