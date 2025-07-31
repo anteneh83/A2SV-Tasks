@@ -1,25 +1,82 @@
+// app/jobs/page.tsx
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import JobCard from "@/components/JobCard";
-import { jobsData } from "../lib/jobs";
+import { fetchOpportunities } from "../lib/api";
 
 type SortOption = "most-relevant" | "newest" | "oldest";
 
+interface Opportunity {
+  id: string;
+  title: string;
+  organization: string;
+  location: string[];
+  description: string;
+  categories: string[];
+  opType: string;
+  orgName: string;
+  datePosted: string;
+  logoUrl?: string;
+}
+
 export default function JobsPage() {
   const [sortBy, setSortBy] = useState<SortOption>("most-relevant");
+  const [opportunities, setOpportunities] = useState<Opportunity[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const sortedJobs = [...jobsData].sort((a, b) => {
+  useEffect(() => {
+    const loadOpportunities = async () => {
+      try {
+        const data = await fetchOpportunities();
+        setOpportunities(data);
+      } catch (err) {
+        setError("Failed to load opportunities. Please try again later.");
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadOpportunities();
+  }, []);
+
+  const sortedJobs = [...opportunities].sort((a, b) => {
     switch (sortBy) {
       case "newest":
-        return parseInt(b.id) - parseInt(a.id);
+        return (
+          new Date(b.datePosted).getTime() - new Date(a.datePosted).getTime()
+        );
       case "oldest":
-        return parseInt(a.id) - parseInt(b.id);
+        return (
+          new Date(a.datePosted).getTime() - new Date(b.datePosted).getTime()
+        );
       case "most-relevant":
       default:
         return a.title.localeCompare(b.title);
     }
   });
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-100 py-8 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <p>Loading opportunities...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gray-100 py-8 px-4">
+        <div className="max-w-4xl mx-auto text-center text-red-500">
+          <p>{error}</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 py-8 px-4">
@@ -50,11 +107,12 @@ export default function JobsPage() {
               key={job.id}
               id={job.id}
               title={job.title}
-              organization={job.organization}
-              location={job.location}
+              organization={job.orgName}
+              location={job.location.join(", ")}
               description={job.description}
-              tags={job.tags}
-              workType={job.workType}
+              tags={job.categories}
+              workType={job.opType === "inPerson" ? "In Person" : "Remote"}
+              logoUrl={job.logoUrl}
             />
           ))}
         </div>
