@@ -37,13 +37,13 @@ npm run dev
 ### Newest Jobs
 <img width="1066" height="679" alt="image" src="https://github.com/user-attachments/assets/bfedc4b8-684b-4999-ae00-fa25bfd64e81" />
 
-###detail of the first newest job
+### detail of the first newest job
 <img width="1109" height="683" alt="image" src="https://github.com/user-attachments/assets/9088fdd5-57ae-4937-9404-7d0c07720306" />
 
 ### Most Relevant Jobs
 <img width="1031" height="673" alt="image" src="https://github.com/user-attachments/assets/41a62907-6452-4ce0-b0d2-7395bc874d7a" />
 
-###detail of the First Relevant Jobs
+### detail of the First Relevant Jobs
 <img width="1017" height="671" alt="image" src="https://github.com/user-attachments/assets/8874bb3c-d8b0-4e92-811a-500ca256b5af" />
 
 
