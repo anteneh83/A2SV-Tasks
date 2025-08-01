@@ -206,7 +206,7 @@ export default function ApplicantDashboard({ params }: PageProps) {
                       {job.categories.map((category: string, index: number) => (
                         <span
                           key={index}
-                          className="px-3 py-1 bg-purple-100 text-purple-800 rounded-full"
+                          className="px-3 py-1 bg-purple-100 text-yellow-400 rounded-full"
                         >
                           {category}
                         </span>
