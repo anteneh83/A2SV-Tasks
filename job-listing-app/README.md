@@ -1,29 +1,34 @@
 # Job Listing Application
 
-A Next.js-based job board application with dynamic job listings, filtering, and detailed job view pages.
+A Next.js-based job board application with complete authentication system and dynamic job listings.
 
 ## Features
 
+### New Authentication System
+- Email/Password Signup & Login
+- Google OAuth Integration
+- Protected Routes
+- JWT Token Management
+- Form Validation
+
 ### Job Listings Page
-- View all available job opportunities  
+- View all available job opportunities from API  
 - Sort by relevance, newest, or oldest  
 - Responsive card design with organization avatars  
 - Color-coded tags (Education = yellow, IT = blue)  
 
-### 📄 Job Detail Page
+### Job Detail Page
 - Detailed view of each job opportunity  
 - Two-column layout for optimal information display  
-- Icons for key information (calendar, location, etc.)  
-- "Submit Application" button  
-- Loading and error states  
+- Icons for key information (calendar, location, etc.)   
 
 ### Technical Features
 - Built with **Next.js App Router**  
+- NextAuth.js for authentication  
 - TypeScript support  
 - Tailwind CSS for styling  
 - Responsive design  
-- Dynamic routing for job details  
-- Client-side data fetching  
+- API integration with Axios  
 
 ## Installation
 
@@ -33,22 +38,23 @@ cd job-listing-app
 npm install 
 npm run dev
 ```
-# some screenshoot demos
-### Newest Jobs
-<img width="1066" height="679" alt="image" src="https://github.com/user-attachments/assets/bfedc4b8-684b-4999-ae00-fa25bfd64e81" />
 
-### detail of the first newest job
-<img width="1109" height="683" alt="image" src="https://github.com/user-attachments/assets/9088fdd5-57ae-4937-9404-7d0c07720306" />
+# Screenshots
+## Authentication Flow
+### Signup Page	
+<img width="1004" height="656" alt="image" src="https://github.com/user-attachments/assets/79afc6f8-41a5-442d-a220-c1382f1989e6" />
 
-### Most Relevant Jobs
-<img width="1031" height="673" alt="image" src="https://github.com/user-attachments/assets/41a62907-6452-4ce0-b0d2-7395bc874d7a" />
+### OTP verification
+<img width="1220" height="672" alt="image" src="https://github.com/user-attachments/assets/89c53315-ce16-4fe7-9dac-722e73259277" />
 
-### detail of the First Relevant Jobs
-<img width="1017" height="671" alt="image" src="https://github.com/user-attachments/assets/8874bb3c-d8b0-4e92-811a-500ca256b5af" />
+### Login Page	
+<img width="1182" height="650" alt="image" src="https://github.com/user-attachments/assets/ff1c7c75-7b8c-40be-b039-46bdc2f96776" />
 
+### Job Listings
+<img width="1031" height="673" alt="image" src="https://github.com/user-attachments/assets/bb5af11c-c042-4dc6-bca3-37d373955ac3" />
 
+### Newest Jobs	
+<img width="1066" height="679" alt="image" src="https://github.com/user-attachments/assets/96ec0c61-418e-474e-91c8-ba894cacdc73" />
 
-
-
-
-
+### Job Detail
+<img width="1109" height="683" alt="image" src="https://github.com/user-attachments/assets/78558a95-0d73-4326-9915-198b3f256ef8" />
