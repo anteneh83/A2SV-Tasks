@@ -85,9 +85,11 @@ npm run dev
 
 ### Job Detail
 <img width="1109" height="683" alt="image" src="https://github.com/user-attachments/assets/78558a95-0d73-4326-9915-198b3f256ef8" />
-## Bookmark funcitonality
+
+## Bookmark Functionalty
 ### Bookmark created and deleted
 <img width="1249" height="669" alt="image" src="https://github.com/user-attachments/assets/ba07c1c1-8da1-4e1e-8a9e-3710911c946c" />
+
 ## Bookmark page
 <img width="1231" height="640" alt="image" src="https://github.com/user-attachments/assets/c7de60f4-ff4e-470f-bceb-296601a2dd27" />
 
