@@ -1,15 +1,17 @@
 # Job Listing Application
 
-A Next.js-based job board application with complete authentication system and dynamic job listings.
+A Next.js-based job board application with a complete authentication system, dynamic job listings, and enhanced bookmark functionality.
+
+---
 
 ## Features
 
 ### New Authentication System
-- Email/Password Signup & Login
-- Google OAuth Integration
-- Protected Routes
-- JWT Token Management
-- Form Validation
+- Email/Password Signup & Login  
+- Google OAuth Integration  
+- Protected Routes  
+- JWT Token Management  
+- Form Validation  
 
 ### Job Listings Page
 - View all available job opportunities from API  
@@ -22,13 +24,38 @@ A Next.js-based job board application with complete authentication system and dy
 - Two-column layout for optimal information display  
 - Icons for key information (calendar, location, etc.)   
 
-### Technical Features
+### Bookmark Functionality (Final Task)
+- Bookmark toggle button on each job card  
+- Bookmark/unbookmark jobs for authenticated users only  
+- View bookmarked jobs in a dedicated page  
+- Error handling with user feedback  
+- Search job positions by title with accurate results  
+
+---
+
+## Technical Features
 - Built with **Next.js App Router**  
 - NextAuth.js for authentication  
 - TypeScript support  
 - Tailwind CSS for styling  
-- Responsive design  
-- API integration with Axios  
+- Responsive design (mobile & desktop friendly)  
+- API integration with Axios & Fetch  
+- Unit testing with Jest  
+- End-to-end testing with Cypress  
+
+---
+
+## API Endpoints
+
+**Base URL:** `https://akil-backend.onrender.com/`
+
+| Method | Endpoint                 | Description                       | Auth Required |
+|--------|--------------------------|---------------------------------|--------------|
+| GET    | `/bookmarks`              | Get all bookmarked jobs for user| ✅           |
+| POST   | `/bookmarks/:eventID`     | Create bookmark (empty body)    | ✅           |
+| DELETE | `/bookmarks/:eventID`     | Remove bookmark                 | ✅           |
+
+---
 
 ## Installation
 
@@ -58,3 +85,10 @@ npm run dev
 
 ### Job Detail
 <img width="1109" height="683" alt="image" src="https://github.com/user-attachments/assets/78558a95-0d73-4326-9915-198b3f256ef8" />
+## Bookmark funcitonality
+### Bookmark created and deleted
+<img width="1249" height="669" alt="image" src="https://github.com/user-attachments/assets/ba07c1c1-8da1-4e1e-8a9e-3710911c946c" />
+## Bookmark page
+<img width="1231" height="640" alt="image" src="https://github.com/user-attachments/assets/c7de60f4-ff4e-470f-bceb-296601a2dd27" />
+
+
