@@ -3,6 +3,7 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { toast } from "sonner";
 
 export default function VerifyEmailPage() {
   const searchParams = useSearchParams();
@@ -64,7 +65,9 @@ export default function VerifyEmailPage() {
       );
 
       if (response.data.success) {
-        router.push(`/login?verified=true&email=${encodeURIComponent(email)}`);
+        router.push(
+          `/auth/login?verified=true&email=${encodeURIComponent(email)}`
+        );
       } else {
         setError(response.data.message || "Verification failed");
       }
@@ -72,7 +75,7 @@ export default function VerifyEmailPage() {
       setError(
         err.response?.data?.message || "An error occurred during verification"
       );
-      console.error("Verification error:", err);
+      toast.error(`Verification error: ${err}`);
     } finally {
       setIsLoading(false);
     }
@@ -91,7 +94,7 @@ export default function VerifyEmailPage() {
       );
     } catch (err) {
       setError("Failed to resend verification code");
-      console.error("Resend error:", err);
+      toast.error(`Resend error: ${err}`);
     }
   };
 
@@ -109,14 +112,7 @@ export default function VerifyEmailPage() {
           </p>
         </div>
 
-        {error && (
-          <div
-            className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
-            role="alert"
-          >
-            <span className="block sm:inline">{error}</span>
-          </div>
-        )}
+        {error && toast.error(`${error}`)}
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="flex justify-center space-x-4">

@@ -5,20 +5,23 @@ import { FiCalendar, FiMapPin, FiCheckCircle } from "react-icons/fi";
 import { FaCircle } from "react-icons/fa";
 import { fetchOpportunityById } from "../../lib/api";
 import { useEffect, useState } from "react";
+import { use } from "react";
+import { Spinner } from "@/components/spinner";
 
-interface PageProps {
-  params: { id: string };
-}
-
-export default function ApplicantDashboard({ params }: PageProps) {
+export default function ApplicantDashboard({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const [job, setJob] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const unwrappedParams = use(params);
 
   useEffect(() => {
     const loadJob = async () => {
       try {
-        const data = await fetchOpportunityById(params.id);
+        const data = await fetchOpportunityById(unwrappedParams.id);
         setJob(data);
       } catch (err) {
         setError("Failed to load job details. Please try again later.");
@@ -29,14 +32,12 @@ export default function ApplicantDashboard({ params }: PageProps) {
     };
 
     loadJob();
-  }, [params.id]);
+  }, [unwrappedParams.id]);
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-100 py-8 px-4">
-        <div className="max-w-6xl mx-auto text-center">
-          <p>Loading job details...</p>
-        </div>
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+        <Spinner />
       </div>
     );
   }

@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { Spinner } from "./spinner";
 
 export default function ProtectedRoute({
   children,
@@ -15,14 +16,14 @@ export default function ProtectedRoute({
   useEffect(() => {
     if (status === "loading") return;
     if (!session) {
-      router.push("/login");
+      router.push("/auth/login");
     }
   }, [session, status, router]);
 
   if (status === "loading" || !session) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p>Loading...</p>
+        <Spinner />
       </div>
     );
   }

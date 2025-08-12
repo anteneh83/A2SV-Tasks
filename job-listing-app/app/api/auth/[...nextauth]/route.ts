@@ -1,4 +1,3 @@
-// app/api/auth/[...nextauth]/route.ts
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import axios from 'axios';
@@ -7,15 +6,15 @@ import GoogleProvider from 'next-auth/providers/google';
 const handler = NextAuth({
   providers: [
     GoogleProvider({
-    clientId: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    authorization: {
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      authorization: {
         params: {
-        prompt: "select_account", // Always show account selection
-        access_type: "offline",
-        response_type: "code"
+          prompt: "select_account",
+          access_type: "offline",
+          response_type: "code"
         }
-    }
+      }
     }),
     CredentialsProvider({
       name: 'Credentials',
@@ -30,6 +29,7 @@ const handler = NextAuth({
             password: credentials?.password
           });
 
+          // console.log(response, "response")
           if (response.data.success) {
             return {
               id: response.data.data.id,
@@ -48,6 +48,10 @@ const handler = NextAuth({
       }
     })
   ],
+  session: {
+    strategy: "jwt",
+    maxAge: 24 * 60 * 60, // 1 day
+  },
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
@@ -65,11 +69,11 @@ const handler = NextAuth({
     }
   },
   pages: {
-    signIn: '/login',
-    signOut: '/login',
-    error: '/login'
+    signIn: '/auth/login',
+    signOut: '/auth/login',
+    error: '/auth/login'
   },
-  secret: process.env.NEXTAUTH_SECRET
+  secret: process.env.NEXTAUTH_SECRET,
 });
 
 export { handler as GET, handler as POST };

@@ -1,84 +1,70 @@
 "use client";
 
+import { useRouter, useSearchParams } from "next/navigation";
+import { signIn, signOut } from "next-auth/react";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { signIn } from "next-auth/react";
-import axios from "axios";
+import { toast } from "sonner";
 
-export default function SignupPage() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    role: "user",
-  });
+export default function LoginPage() {
+  const searchParams = useSearchParams();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
   const router = useRouter();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  const verified = searchParams.get("verified");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+    setIsLoading(true);
 
-    if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match");
-      return;
-    }
+    const result = await signIn("credentials", {
+      redirect: false,
+      email,
+      password,
+    });
 
-    try {
-      setIsLoading(true);
-      const response = await axios.post(
-        "https://akil-backend.onrender.com/signup",
-        formData
-      );
+    setIsLoading(false);
+    // console.log(result, "result");
 
-      if (response.data.success) {
-        router.push(`/verify-email?email=${formData.email}`);
-      } else {
-        setError(response.data.message || "Signup failed");
-      }
-    } catch (err: any) {
-      setError(
-        err.response?.data?.message || "An error occurred during signup"
-      );
-      console.error("Signup error:", err);
-    } finally {
-      setIsLoading(false);
+    if (result?.error) {
+      setError(result.error);
+    } else {
+      toast.success("logged in success full");
+      router.push("/dashboard/jobs");
     }
   };
 
-  const handleGoogleSignup = async () => {
+  const handleGoogleLogin = async () => {
     try {
       setGoogleLoading(true);
       setError("");
+      // Clear any existing session first
+      await signOut({ redirect: false });
+      // Initiate new Google sign-in
       await signIn("google", { callbackUrl: "/jobs" });
     } catch (error) {
       setError("Failed to sign in with Google");
-      console.error("Google signin error:", error);
+      toast.error(`Google signin error: ${error}`);
     } finally {
       setGoogleLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center  py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-xs w-full space-y-8">
+    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-sm w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Sign Up Today!
+            Welcome Back,
           </h2>
         </div>
+
+        {verified && toast.success(`${verified}`)}
 
         {error && (
           <div
@@ -91,12 +77,12 @@ export default function SignupPage() {
 
         <div>
           <button
-            onClick={handleGoogleSignup}
+            onClick={handleGoogleLogin}
             disabled={googleLoading}
             className="w-full flex items-center justify-center px-4 py-3 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {googleLoading ? (
-              "Signing up with Google..."
+              "Signing in with Google..."
             ) : (
               <>
                 <svg className="w-5 h-5 mr-3" viewBox="0 0 24 24">
@@ -117,13 +103,13 @@ export default function SignupPage() {
                     fill="#EA4335"
                   />
                 </svg>
-                Sign Up with Google
+                Sign in with Google
               </>
             )}
           </button>
         </div>
 
-        <div className="relative py-6">
+        <div className="relative py-4">
           <div
             className="absolute inset-0 flex items-center"
             aria-hidden="true"
@@ -132,37 +118,19 @@ export default function SignupPage() {
           </div>
           <div className="relative flex justify-center">
             <span className="bg-white px-2 text-sm text-gray-500">
-              Or Sign Up with email
+              Or continue with email
             </span>
           </div>
         </div>
 
-        <form className=" space-y-6" onSubmit={handleSubmit}>
+        <form className="mt-2 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm space-y-4">
             <div>
               <label
-                htmlFor="name"
-                className="block text-sm font-medium text-gray-700 mb-1"
-              >
-                Full Name
-              </label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                required
-                className="appearance-none relative block w-full px-3 py-3 border border-gray-200 placeholder-gray-300 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                placeholder="Enter your full name"
-                value={formData.name}
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-gray-800 mb-1"
               >
-                Email address
+                Email Address
               </label>
               <input
                 id="email"
@@ -172,8 +140,8 @@ export default function SignupPage() {
                 required
                 className="appearance-none relative block w-full px-3 py-3 border border-gray-200 placeholder-gray-300 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                 placeholder="Enter email address"
-                value={formData.email}
-                onChange={handleChange}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div>
@@ -187,33 +155,12 @@ export default function SignupPage() {
                 id="password"
                 name="password"
                 type="password"
-                autoComplete="new-password"
+                autoComplete="current-password"
                 required
-                minLength={6}
                 className="appearance-none relative block w-full px-3 py-3 border border-gray-200 placeholder-gray-300 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                 placeholder="Enter password"
-                value={formData.password}
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="confirmPassword"
-                className="block text-sm font-medium text-gray-700 mb-1"
-              >
-                Confirm Password
-              </label>
-              <input
-                id="confirmPassword"
-                name="confirmPassword"
-                type="password"
-                autoComplete="new-password"
-                required
-                minLength={6}
-                className="appearance-none relative block w-full px-3 py-3 border border-gray-200 placeholder-gray-300 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                placeholder="Confirm password"
-                value={formData.confirmPassword}
-                onChange={handleChange}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
           </div>
@@ -224,41 +171,20 @@ export default function SignupPage() {
               disabled={isLoading}
               className="w-full flex justify-center py-2 px-4 border border-transparent rounded-full shadow-sm text-sm font-medium text-white bg-blue-900 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isLoading ? "Signing up..." : "Continue"}
+              {isLoading ? "Logging in..." : "Login"}
             </button>
           </div>
         </form>
 
         <div className="text-sm">
           <p className="text-gray-600">
-            Already have an account?{" "}
+            Don't have an account?{" "}
             <Link
-              href="/login"
+              href="/auth/signup"
               className="font-bold text-blue-900 hover:text-blue-500"
             >
-              Login
+              Sign Up
             </Link>
-          </p>
-        </div>
-
-        <div className="text-xs text-gray-500">
-          <p>
-            By clicking 'Continue', you acknowledge that you have read and
-            accepted our{" "}
-            <a
-              href="#"
-              className="font-medium text-blue-600 hover:text-blue-500"
-            >
-              Terms of Service
-            </a>{" "}
-            and{" "}
-            <a
-              href="#"
-              className="font-medium text-blue-600 hover:text-blue-500"
-            >
-              Privacy Policy
-            </a>
-            .
           </p>
         </div>
       </div>
